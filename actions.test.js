@@ -1,5 +1,5 @@
 const action = require('./action')
-
+const reducer = require('./reducers')
 
 // testing acitons
 
@@ -17,46 +17,46 @@ test("add action should  have payload defined as function", () => {
     expect(typeof (action.add().payload)).not.toBe("function")
 })
 
-// testing sub operation
-test("sub action should be defined", () => {
-    expect(action.sub).not.toBe(undefined)
+// testing subtract operation
+test("subtract action should be defined", () => {
+    expect(action.subtract).not.toBe(undefined)
 })
-test("sub action should be function ", () => {
-    expect(typeof (action.sub)).toBe("function")
+test("subtract action should be function ", () => {
+    expect(typeof (action.subtract)).toBe("function")
 })
-test("sub action should  have payload defined", () => {
-    expect(action.sub().payload).not.toBe(undefined)
+test("subtract action should  have payload defined", () => {
+    expect(action.subtract().payload).not.toBe(undefined)
 })
-test("sub action should  have payload defined as function", () => {
-    expect(typeof (action.sub().payload)).not.toBe("function")
-})
-
-// testing mul operation
-test("mul action should be defined", () => {
-    expect(action.mul).not.toBe(undefined)
-})
-test("mul action should be function ", () => {
-    expect(typeof (action.mul)).toBe("function")
-})
-test("mul action should  have payload defined", () => {
-    expect(action.mul().payload).not.toBe(undefined)
-})
-test("mul action should  have payload defined as function", () => {
-    expect(typeof (action.mul().payload)).not.toBe("function")
+test("subtract action should  have payload defined as function", () => {
+    expect(typeof (action.subtract().payload)).not.toBe("function")
 })
 
-// testing div operation
-test("div action should be defined", () => {
-    expect(action.div).not.toBe(undefined)
+// testing multiply operation
+test("multiply action should be defined", () => {
+    expect(action.multiply).not.toBe(undefined)
 })
-test("div action should be function ", () => {
-    expect(typeof (action.div)).toBe("function")
+test("multiply action should be function ", () => {
+    expect(typeof (action.multiply)).toBe("function")
 })
-test("div action should  have payload defined", () => {
-    expect(action.div().payload).not.toBe(undefined)
+test("multiply action should  have payload defined", () => {
+    expect(action.multiply().payload).not.toBe(undefined)
 })
-test("div action should  have payload defined as function", () => {
-    expect(typeof (action.div().payload)).not.toBe("function")
+test("multiply action should  have payload defined as function", () => {
+    expect(typeof (action.multiply().payload)).not.toBe("function")
+})
+
+// testing division operation
+test("division action should be defined", () => {
+    expect(action.division).not.toBe(undefined)
+})
+test("division action should be function ", () => {
+    expect(typeof (action.division)).toBe("function")
+})
+test("division action should  have payload defined", () => {
+    expect(action.division().payload).not.toBe(undefined)
+})
+test("division action should  have payload defined as function", () => {
+    expect(typeof (action.division().payload)).not.toBe("function")
 })
 
 
@@ -85,3 +85,21 @@ test("changeSign action should be function ", () => {
     expect(typeof (action.changeSign)).toBe("function")
 })
 
+
+
+
+
+// testing Reducers
+
+// default case
+test("undefined action should return initial state  ", () => {
+    expect(reducer({}, undefined)).toBe()
+})
+
+
+
+test("Clear Action should return to initial state", () => {
+    reducer({}, action.clear())
+
+
+})
