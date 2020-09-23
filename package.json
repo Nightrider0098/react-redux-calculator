@@ -1,0 +1,22 @@
+{
+  "name": "react-redux-calculator",
+  "version": "1.0.0",
+  "description": "Testing react-redux Calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Newton-School/react-redux-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Newton-School/react-redux-calculator/issues"
+  },
+  "homepage": "https://github.com/Newton-School/react-redux-calculator#readme",
+  "dependencies": {
+    "jest": "^26.4.2"
+  }
+}
