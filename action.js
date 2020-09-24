@@ -5,14 +5,36 @@ function add() {
         payload: (x) => x
     }
 }
+function subtract() {
+    return {
+        type: "OPERATOR",
+        // define a function accordingly
+        payload: (x) => x
+    }
+}
+function multiply() {
+    return {
+        type: "OPERATOR",
+        // define a function accordingly
+        payload: (x) => x
+    }
+}
+function division() {
+    return {
+        type: "OPERATOR",
+        // define a function accordingly
+        payload: (x) => x
+    }
+}
 function equal() {
     return {
         type: "EQUAL"
     }
 }
-function type() {
+function type(num) {
     return {
-        type: "TYPE"
+        type: "TYPE",
+        payload: num
     }
 }
 function changeSign() {
@@ -25,4 +47,4 @@ function clear() {
         type: 'CLEAR'
     }
 }
-module.exports = {add,equal,clear,changeSign,type};
+module.exports = { add, subtract, multiply, division, equal, clear, changeSign, type };
