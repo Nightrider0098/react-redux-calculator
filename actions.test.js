@@ -15,7 +15,7 @@ describe("Testing Actions", () => {
             expect(action.add().payload).not.toBe(undefined)
         })
         it("add action should  have payload defined as function", () => {
-            expect(typeof (action.add().payload)).not.toBe("function")
+            expect(typeof (action.add().payload)).toBe("function")
         })
     })
 
@@ -31,7 +31,7 @@ describe("Testing Actions", () => {
             expect(action.subtract().payload).not.toBe(undefined)
         })
         it("subtract action should  have payload defined as function", () => {
-            expect(typeof (action.subtract().payload)).not.toBe("function")
+            expect(typeof (action.subtract().payload)).toBe("function")
         })
     })
 
@@ -46,7 +46,7 @@ describe("Testing Actions", () => {
             expect(action.multiply().payload).not.toBe(undefined)
         })
         it("multiply action should  have payload defined as function", () => {
-            expect(typeof (action.multiply().payload)).not.toBe("function")
+            expect(typeof (action.multiply().payload)).toBe("function")
         })
     })
 
@@ -61,16 +61,16 @@ describe("Testing Actions", () => {
             expect(action.division().payload).not.toBe(undefined)
         })
         it("division action should  have payload defined as function", () => {
-            expect(typeof (action.division().payload)).not.toBe("function")
+            expect(typeof (action.division().payload)).toBe("function")
         })
     })
 
     describe("testing CLEAN button", () => {
         it("CLEAN action should be defined", () => {
-            expect(action.clear).not.toBe(undefined)
+            expect(action.clean).not.toBe(undefined)
         })
         it("CLEAN action should be function ", () => {
-            expect(typeof (action.clear)).toBe("function")
+            expect(typeof (action.clean)).toBe("function")
         })
     })
 
@@ -101,7 +101,7 @@ describe("Testing Reducers", () => {
             expect(reducer({}, {})).not.toBe(undefined)
         })
         it("undefined action should return initial state  ", () => {
-            expect(reducer(initialState, {})).toBe(initialState)
+            expect(reducer(initialState, {})).toStrictEqual(initialState)
         })
         it("undefined action with some states should return same state ", () => {
             previousState = {
@@ -109,41 +109,42 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => { return (10 / a) },
                 lastAction: "TYPE"
             }
-            expect(reducer(previousState, {})).toBe(previousState)
+            expect(reducer(previousState, {})).toStrictEqual(previousState)
         })
     })
 
-    describe('clearn screen ', () => {
+    describe('cleann screen ', () => {
         it("CLEAN Action should return to initial state", () => {
             const previousState = {
                 number: 50,
-                storedFunc: (x) => x
+                storedFunc: (x) => x,
+                lastAction:"TYPE"
             }
 
-            expect(reducer(previousState, action.clear())).toBe({ ...initialState, lastAction: 'CLEAR' })
+            expect(reducer(previousState, action.clean())).toStrictEqual({ ...initialState, lastAction: 'CLEAN' })
         })
         it("CLEAN Action should work even when we used at initial state", () => {
-            expect(reducer(initialState, action.clear())).toBe({...initialState, lastAction: 'CLEAR' })
+            expect(reducer(initialState, action.clean())).toStrictEqual({...initialState, lastAction: 'CLEAN' })
         })
     })
 
     describe("Digit input<1,2,34,5,6,7,8,9>", () => {
         it("type should work after CLEAN Action/initialState", () => {
-            expect(reducer(initialState, action.type(1))).toBe({
+            expect(reducer(initialState, action.type(1))).toStrictEqual({
                 ...initialState,
                 lastAction: 'TYPE',
                 number: 1
             })
         })
         it("type should work after TYPE action", () => {
-            expect(reducer({ ...initialState, number: 5, lastAction: "TYPE" }, action.type(1))).toBe({
+            expect(reducer({ ...initialState, number: 5, lastAction: "TYPE" }, action.type(1))).toStrictEqual({
                 ...initialState, number: 51, lastAction: "TYPE"
             })
         })
         it("TYPE action after EQUAL action should reset the number variable", () => {
 
             const previousState = { number: 45, lastAction: "EQUAL", storedFunc: (x) => x }
-            expect(reducer(previousState, action.type(5))).toBe({ ...previousState, number: 5, lastAction: "TYPE" })
+            expect(reducer(previousState, action.type(5))).toStrictEqual({ ...previousState, number: 5, lastAction: "TYPE" })
         })
         it("TYPE action after OPERATOR should only update the number not evaluate consicutively", () => {
             const previousState = {
@@ -152,7 +153,7 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => { return (12 / a) }
             };
 
-            expect(reducer(previousState, action.type(5))).toBe({ ...previousState, number: 5, lastAction: "TYPE" })
+            expect(reducer(previousState, action.type(5))).toStrictEqual({ ...previousState, number: 5, lastAction: "TYPE" })
 
         })
     })
@@ -186,9 +187,9 @@ describe("Testing Reducers", () => {
                 number: -15,
                 lastAction: "CHANGE_SIGN"
             }
-            expect(reducer(previousState, action.changeSign())).toBe(expectedState)
+            expect(reducer(previousState, action.changeSign())).toStrictEqual(expectedState)
         })
-        it("signChange Action after OPERATOR action should only set the number to zero and other parameters should not change", () => {
+        it("signChange Action after OPERATOR action should only set the number to negative and other parameters should not change", () => {
             const previousState = {
                 number: 45,
                 storedFunc: (a) => {
@@ -199,11 +200,11 @@ describe("Testing Reducers", () => {
             }
             const expectedState = {
                 ...previousState,
-                number: 0,
+                number: -45,
                 lastAction : "CHANGE_SIGN"
 
             }
-            expect(reducer(previousState, action.changeSign())).toBe(expectedState)
+            expect(reducer(previousState, action.changeSign())).toStrictEqual(expectedState)
         })
         it("signChange Aciton  should  change the sign when last action is TYPE", () => {
             const previousState = {
@@ -218,7 +219,7 @@ describe("Testing Reducers", () => {
                 number: -15,
                 lastAction: "CHANGE_SIGN"
             }
-            expect(reducer(previousState, action.changeSign())).toBe(expectedState)
+            expect(reducer(previousState, action.changeSign())).toStrictEqual(expectedState)
         })
 
     })
@@ -236,7 +237,7 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => { return (10 / a) },
                 lastAction: "EQUAL"
             }
-            expect(reducer(previousState, action.equal())).toBe(expectedState)
+            expect(reducer(previousState, action.equal())).toStrictEqual(expectedState)
         })
         it("equal action should compute answer even when we have OPERATOR in lastAction and storeFunc should not change OPERATOR", () => {
             previousState = {
@@ -249,7 +250,7 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => a,
                 lastAction: "EQUAL"
             }
-            expect(reducer(previousState, action.equal())).toBe(expectedState)
+            expect(reducer(previousState, action.equal())).toStrictEqual(expectedState)
         })
     })
 
@@ -265,7 +266,7 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => { return (45 / a) },
                 lastAction: "OPERATOR"
             }
-            expect(reducer(previousState, action.division())).toBe(expectedState)
+            expect(reducer(previousState, action.division())).toStrictEqual(expectedState)
         })
         it("operatoin after type action should just add the storeFunc", () => {
             previousState = {
@@ -278,7 +279,7 @@ describe("Testing Reducers", () => {
                 storedFunc: (a) => { return (45 / a) },
                 lastAction: "OPERATOR"
             }
-            expect(reducer(previousState, action.division())).toBe(expectedState)
+            expect(reducer(previousState, action.division())).toStrictEqual(expectedState)
         })
     })
 })

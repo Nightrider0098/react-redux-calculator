@@ -42,9 +42,9 @@ function changeSign() {
         type: "CHANGE_SIGN"
     }
 }
-function clear() {
+function clean() {
     return {
-        type: 'CLEAR'
+        type: 'CLEAN'
     }
 }
-module.exports = { add, subtract, multiply, division, equal, clear, changeSign, type };
+module.exports = { add, subtract, multiply, division, equal, clean, changeSign, type };
